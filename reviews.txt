@@ -1,0 +1,5 @@
+# Review của A 
+    + Công việc của B: Ok, không có lỗi 
+    + Công việc của C: 
+        - Cần sửa lại chỗ checkNumber phần checkSquareNumber để phù hợp với hàm đã viết.
+        - Ok, không có lỗi nào 
