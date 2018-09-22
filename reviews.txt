@@ -7,3 +7,6 @@
     + Công việc của A: Đã hoàn thành và ko có lỗi
     + Công việc của B: Đã hoàn thành và ko có lỗi  
     + Công việc của C: Đã sửa lại theo như review của A
+# Review của B
+    + Công việc của A: Đã hoàn thành và ko có lỗi  
+    + Công việc của C: Đã sửa lại theo như review của A
