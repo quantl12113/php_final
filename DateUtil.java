@@ -1,3 +1,4 @@
+import java.util.Date;
 public class DateUtil {
     public static boolean checkDate(int day, int month, int year){
         boolean leapyear = false;
@@ -26,4 +27,7 @@ public class DateUtil {
             default: return true;
         }
     }
+	public static int caculateAge(int year) {
+		return (new Date().getYear() + 1900 - year);
+	}
 }
