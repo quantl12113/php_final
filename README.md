@@ -21,21 +21,24 @@
 		check if an integer  is  
 		* a prime number  or  a  composite  **(B)**
 		* a square number **(A)**
-		* a perfect number **(C)**	
+		* a perfect number **(C)**	100%
 	__3) HelloWorldclass__
 		* Ask a user to enter his/her name and birthday **(A)**
 		* If the birthday is not a valid date, ask her again until it is **(B)**
 			_use  checkDate() method  of  the  class  DateUtil_
-		* Say hello to that person and display his/her age **(C)**
-			_use  calculateAge() method of the class DateUtil_
+		* Say hello to that person and display his/her age **(C)**  100%
+ 			_use  calculateAge() method of the class DateUtil_
 	__4)FirstNumberAppclass__
 		* Ask user to enter an integer from keyboard, if not ask her/him to enter again until valid (B)
 			_Use  NumberUtil class_
 		* Display if the number is a prime or composite  **(A)**
-		  Display if the number is a square number **(C)**
-		  Display if the number is a perfect number **(C)**
+		  Display if the number is a square number **(C)**  100%
+		  Display if the number is a perfect number **(C)**  100%
 ##IV) Review :
 	1) Reviewer : A  
 		on work of B and C  
+		reviews updated to reviews.txt
+    2) Reviewer : C
+		on work of A and B
 		reviews updated to reviews.txt
 		
