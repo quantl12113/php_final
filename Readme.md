@@ -9,7 +9,7 @@ git clone https://bitbucket.org/votuan921/isd.vn.20181-06.git
 ```
 - Vào thư mục project:
 ```
-cd lFinalProject/ecom 
+cd FinalProject/ecom 
 ```
 - Khởi tạo key cho Laravel 
 ```
