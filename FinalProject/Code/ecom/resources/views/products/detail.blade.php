@@ -78,7 +78,7 @@
 										@if($total_stock>0)
 											<button type="submit" class="btn btn-fefault cart" id="cartButton">
 												<i class="fa fa-shopping-cart"></i>
-												View Product
+												Add to Cart
 											</button>
 										@endif	
 									</span>
