@@ -1,0 +1,12 @@
+# Review của A 
+    + Công việc của B: Ok, không có lỗi 
+    + Công việc của C: 
+        - Cần sửa lại chỗ checkNumber phần checkSquareNumber để phù hợp với hàm đã viết.
+        - Ok, không có lỗi nào 
+# Review của C
+    + Công việc của A: Đã hoàn thành và ko có lỗi
+    + Công việc của B: Đã hoàn thành và ko có lỗi  
+    + Công việc của C: Đã sửa lại theo như review của A
+# Review của B
+    + Công việc của A: Đã hoàn thành và ko có lỗi  
+    + Công việc của C: Đã sửa lại theo như review của A
