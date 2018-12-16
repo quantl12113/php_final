@@ -1,5 +1,0 @@
-- Tuan's review
-   + Dung's assignment is ok(100%)
-- Dung's review:
-  + Tuan's assignment should have ViewProduct() in Visitors Class (I fixed) and the rest is ok
-

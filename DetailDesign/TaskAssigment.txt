@@ -1,6 +1,0 @@
-- Dũng
-	+ Account management Use case
-- Tuấn
-	+ Purchasing Use case
-- Khang
-	+ Cart Use case 

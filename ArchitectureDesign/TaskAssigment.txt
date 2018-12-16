@@ -1,7 +1,0 @@
-Refine Interaction Diagrams
-- Khang
-Analysis class Diagram
-- Dung
-  + Restaurant, Food(Product), Review
--Tuan
-  + Customer, Visitor, Order, Payment
