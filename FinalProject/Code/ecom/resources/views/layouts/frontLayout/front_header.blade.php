@@ -6,15 +6,14 @@ $mainCategories =  Controller::mainCategories();
 		<div class="header-middle navbar" style="position: fixed; top: 0;width: 100%;z-index: 100;background-color: white;"><!--header-middle-->
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-2">
+					<div class="col-sm-2" style="padding-top:5px"> 
 						<div class="logo pull-left">
-							<a href="{{ url('/') }}"><img src="{{ asset('images/frontend_images/home/logo.png') }}" alt="" /></a>
+							<a href="{{ url('/') }}"><img src="{{ asset('images/frontend_images/home/logo.png') }}" alt="/" /></a>
 						</div>
 					</div>
 					<div class="col-sm-5">
-
 						<form action="" method="get">
-							<input type="text" name="find_name" style="border-radius: 33px; width: 300px; margin-top: 10px; margin-left: 10px; height: 30px" placeholder="Search"/>
+							<input type="text" name="find_name" style="border-radius: 30px; width: 300px; margin-top: 8px; margin-left: 10px; height: 30px; padding: 8px" placeholder="Search"/>
                     	</form>
                     </div>
 					<div class="col-sm-5">
@@ -26,7 +25,7 @@ $mainCategories =  Controller::mainCategories();
 								@if(empty(Auth::check()))
 									<li><a href="{{ url('/login-register') }}"><i class="fa fa-lock"></i> Login</a></li>
 								@else
-									<li><a href="{{ url('/account') }}"><i class="fa fa-user"></i> Account</a></li>
+									<li><a href="{{ url('/account') }}"><i class="fa fa-user"></i> {{Auth::user()->name}}</a></li>
 									<li><a href="{{ url('/user-logout') }}"><i class="fa fa-user"></i> Logout</a></li>
 								@endif
 							</ul>

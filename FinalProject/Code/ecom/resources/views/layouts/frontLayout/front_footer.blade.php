@@ -1,5 +1,5 @@
 <footer id="footer"><!--Footer-->
-    <div class="footer-top">
+    <!-- <div class="footer-top">
         <div class="container">
             <div class="row">
                 <div class="col-sm-2">
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     
     <div class="footer-widget">
         <div class="container">
@@ -86,7 +86,7 @@
                     <div class="single-widget">
                         <h2>Service</h2>
                         <ul class="nav nav-pills nav-stacked">
-                            <li><a href="#">Online Help</a></li>
+                            <li><a href="https://www.facebook.com/messages/t/vo.tuan.921">Online Help</a></li>
                             <li><a href="#">Contact Us</a></li>
                             <li><a href="#">Order Status</a></li>
                             <li><a href="#">Change Location</a></li>
@@ -96,13 +96,12 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="single-widget">
-                        <h2>Quock Shop</h2>
+                        <h2>Quick Shop</h2>
                         <ul class="nav nav-pills nav-stacked">
-                            <li><a href="#">T-Shirt</a></li>
-                            <li><a href="#">Mens</a></li>
-                            <li><a href="#">Womens</a></li>
-                            <li><a href="#">Gift Cards</a></li>
-                            <li><a href="#">Shoes</a></li>
+                            <li><a href="#">Fast Food</a></li>
+                            <li><a href="#">Drinks</a></li>
+                            <li><a href="#">Hot Pot</a></li>
+                            <li><a href="#">Buffet</a></li>
                         </ul>
                     </div>
                 </div>
@@ -148,8 +147,8 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
-                <p class="pull-left">Copyright © 2013 E-SHOPPER Inc. All rights reserved.</p>
-                <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                <p class="pull-left">Copyright © 2018 E-SHOPPER Inc. All rights reserved.</p>
+                <!-- <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p> -->
             </div>
         </div>
     </div>

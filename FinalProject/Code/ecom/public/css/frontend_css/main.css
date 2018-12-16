@@ -2578,3 +2578,15 @@ input[type="file"] {
    overflow: auto;
    overflow-y: auto;
 }
+
+.header-middle {
+  font-size: 15px !important;
+}
+
+.shop-menu li {
+  font-size: 25px !important;
+}
+
+.shop-menu .fa {
+  color: black !important;
+}
