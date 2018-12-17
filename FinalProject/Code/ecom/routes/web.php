@@ -72,7 +72,7 @@ Route::group(['middleware' => ['frontlogin']], function() {
 	Route::get('/paypal','ProductsController@paypal');
 	Route::get('/orders','ProductsController@userOrders');
 	Route::get('/orders/{id}','ProductsController@userOrderDetails');
-	Route::match(['get', 'post'], '/comment-review', 'ProductsController@commentReview');
+	Route::post('/comment-review', 'ReviewsController@commentReview');
 });
 
 Route::match(['GET','POST'],'/check-email','UsersController@checkEmail');
@@ -122,6 +122,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/admin/view-user/{id}','UsersController@viewUserDetails');
 	Route::match(['post'], '/admin/view-orders/update-status','ProductsController@updateStatus');
 	Route::match(['post'], '/admin/view-users/update-permision','UsersController@updatePermision');
+
 });
 
 

@@ -18,6 +18,7 @@ use App\DeliveryAddress;
 use App\Order;
 use App\OrdersProduct;
 use App\ReviewsComment;
+use App\ReviewsImage;
 use DB;
 
 class ProductsController extends Controller
@@ -394,8 +395,11 @@ class ProductsController extends Controller
 
         $total_stock = ProductsAttribute::where('product_id',$id)->sum('stock');
         $review_comments = ReviewsComment::where('product_id', $id)->get();
+        $review_images = ReviewsImage::where('product_id', $id)->get();
+        // print_r($review_images);
+        // die;
 
-        return view('products.detail')->with(compact('productDetails','categories','productAltImages','total_stock','relatedProducts', 'review_comments'));
+        return view('products.detail')->with(compact('productDetails','categories','productAltImages','total_stock','relatedProducts', 'review_comments', 'review_images'));
     }
 
     public function getProductPrice(Request $request){
@@ -737,21 +741,5 @@ class ProductsController extends Controller
         }
         $orders =  Order::with('orders')->orderBy('id', 'DESC')->get();
         return redirect()->back()->with(compact('orders'));
-    }
-
-    public function commentReview(Request $request) {
-        if($request->isMethod('post')) {
-            $data = $request->all();
-            $user_id = Auth::user()->id;
-            $product_id = $data['product_id'];
-            $comment = new ReviewsComment;
-            $comment->user_id = $user_id;
-            $comment->name = Auth::user()->name;
-            $comment->review_point = 5;
-            $comment->product_id = $product_id;
-            $comment->description = $data['description'];
-            $comment->save();
-            return redirect()->back();
-        }
     }
 }

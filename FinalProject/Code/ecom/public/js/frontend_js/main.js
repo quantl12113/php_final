@@ -339,3 +339,51 @@ function selectPaymentMethod() {
 		return false;
 	}
 }
+
+$(document).ready(function() {
+	$("#pupload").click(function () {
+		$('#files').trigger('click'); 
+	});	
+  if (window.File && window.FileList && window.FileReader) {
+    $("#files").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+          $("<div class=\"pip\">" +
+            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/>  <div id=\"remove\"><i class=\"fa fa-times\"></i></div>" +
+            "</div>").insertAfter("#files");
+          $("#remove").click(function(){
+            $(this).parent(".pip").remove();
+          });
+          
+          // Old code here
+          /*$("<img></img>", {
+            class: "imageThumb",
+            src: e.target.result,
+            title: file.name + " | Click to remove"
+          }).insertAfter("#files").click(function(){$(this).remove();});*/
+          
+        });
+        fileReader.readAsDataURL(f);
+      }
+    });
+  } else {
+    alert("Your browser doesn't support to File API")
+  }
+});
+
+$(document).ready(function() {
+	var slider = document.getElementById("review_point");
+	var output = document.getElementById("point");
+	output.innerHTML = slider.value;
+
+	slider.oninput = function() {
+  		output.innerHTML = this.value;
+	}
+
+});

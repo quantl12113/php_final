@@ -78,7 +78,7 @@
 										@if($total_stock>0)
 											<button type="submit" class="btn btn-fefault cart" id="cartButton">
 												<i class="fa fa-shopping-cart"></i>
-												View Product
+												Add to Cart
 											</button>
 										@endif	
 									</span>
@@ -132,24 +132,53 @@
 												<li><a href=""><i class="fa fa-clock-o"></i>{{ date_format($date, 'H:i') }}</a></li>
 												<li><a href=""><i class="fa fa-calendar-o"></i>{{ date_format($date, "d/m/Y") }}</a></li>
 											</ul>
+											<h4>{{ $review->title }}</h4>
+											<?php
+												
+											?>
+											@foreach($review_images as $images)
+												@if($images->comment_id == $review->id)
+													<img style="width:100px; height: 100px;" src="{{ asset('images/backend_images/product/small/'.$images->image) }}" alt="" />
+												@endif
+											@endforeach
+											
 											<p>{{ $review->description }}</p>
 										@endforeach
 									@endif	
 								</div>
+								<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Comment</button>
+								<div class="modal fade" id="myModal" role="dialog" style="width: 650px; height: 420px; background-color: white">
+									<div class="modal-dialog">
+        									<button type="button" class="close" data-dismiss="modal">&times;</button>
+        									<h4 class="modal-title">Write review</h4>
+										<div class="modal-body">
+										<form action="{{ url('comment-review') }}" method="post" enctype="multipart/form-data" novalidate="novalidate">
+											{{ csrf_field() }}
+											<input type="hidden" name="product_id" value="{{ $productDetails->id }}">
+											<textarea style="height: 30px; background-color: #f7f7a9; margin-bottom: 5px; padding-top: 5px; font-weight: bold;" name="title" placeholder="Title"></textarea>
+											<textarea style="height: 150px; background-color: #f7f7a9; margin-bottom: 10px; margin-top: 5px;" name="description" placeholder="Write your review"></textarea>
+											<div>	                	
+								            	<div class="pupload" id="pupload" style="background-color: #d6d6cd;">
+								            		<i style="color: #0090f2;" class="fa fa-camera"></i>
+								            		<label>Add Images</label>
+								            	</div>
+								            	<input type="file" id="files" name="photo[]" multiple />
 
-								<div class="col-sm-12">
-									<p><b>Write Your Review</b></p>
-									
-									<form action="{{ url('comment-review') }}" method="post">
-										<input type="hidden" name="product_id" value="{{ $productDetails->id }}">
-											
-										<textarea name="description" ></textarea>
-										<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-										<button type="submit" class="btn btn-default pull-right">
-											Comment
-										</button>
-									</form>
+									        </div>
+									        <span></span>
+											<div class="slidecontainer">
+												<b>Rating: </b> 
+  												<input style="width: 100px" type="range" min="0" max="10" value="5" class="slider" id="review_point" name="review_point">
+  												<b id="point"></b><i class="fa fa-star"></i>
+											</div>
+											<button type="submit" class="btn btn-default pull-right">
+												Comment
+											</button>
+										</form>
+									</div>
+									</div>
 								</div>
+		
 
 							</div>
 
