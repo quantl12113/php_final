@@ -6,6 +6,10 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use App\Classes\ActivationService;
 
 class RegisterController extends Controller
 {
@@ -27,16 +31,19 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/login_register';
+
+    protected $activationService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ActivationService $activationService)
     {
         $this->middleware('guest');
+        $this->activationService = $activationService;
     }
 
     /**
@@ -48,9 +55,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'name'                 => 'required|max:255',
+            'email'                => 'required|email|max:255|unique:users',
+            'password'             => 'required|min:6|confirmed',
         ]);
     }
 
@@ -58,14 +65,46 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return User
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $user = new User;
+        $user->name = $data["name"];
+        $user->email = $data["email"];
+        $user->password = bcrypt($data['password']);
+        $user->save();
+    }
+
+    /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        
+        //event(new Registered($user = $this->create($request->all())));
+        //$this->guard()->login($user);
+        //return $this->registered($request, $user)?: redirect($this->redirectPath());
+
+        $user = $this->create($request->all());
+        event(new Registered($user));
+        //$this->guard()->login($user);
+
+        $this->activationService->sendActivationMail($user);
+        
+        return redirect('/login-register')->with('status', 'Bạn hãy kiểm tra email và thực hiện xác thực theo hướng dẫn.');
+    }
+
+    public function activateUser($token)
+    {
+        if ($user = $this->activationService->activateUser($token)) {
+            auth()->login($user);
+            return redirect('/login-register');
+        }
+        abort(404);
     }
 }

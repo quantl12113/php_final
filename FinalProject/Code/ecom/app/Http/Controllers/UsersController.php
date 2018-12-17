@@ -9,9 +9,16 @@ use App\Country;
 use Auth;
 use DB;
 use Session;
-
+use App\Classes\ActivationService;
 class UsersController extends Controller
 {
+	protected $activationService;
+
+	public function __construct(ActivationService $activationService)
+    {
+        $this->activationService = $activationService;
+    }
+
 	public function userLoginRegister() {
 		return view('users.login_register');
 	}
@@ -29,19 +36,34 @@ class UsersController extends Controller
     			$user->name = $data["name"];
     			$user->email = $data["email"];
     			$user->password = bcrypt($data['password']);
-    			$user->save();
-    			if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
-    				Session::put('frontSession',$data['email']);
-    				if(!empty(Session::get('session_id'))){
-    					$session_id = Session::get('session_id');
-    					DB::table('cart')->where('session_id', $session_id)->update(['user_email'=>$data['email']]);
-    				}
-    				return redirect('/cart');
-    			}
+				$user->save();
+				$this->activationService->sendActivationMail($user);
+				// if ($user = $this->activationService->activateUser($token)) {
+				// 	auth()->login($user);
+				// 	return redirect('/cart');
+				// }
+			
+				return redirect('/login-register')->with('flash_message_error', 'Bạn hãy kiểm tra email và thực hiện xác thực theo hướng dẫn.');
+				
+				
+				// if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+    			// 	Session::put('frontSession',$data['email']);
+    			// 	if(!empty(Session::get('session_id'))){
+    			// 		$session_id = Session::get('session_id');
+    			// 		DB::table('cart')->where('session_id', $session_id)->update(['user_email'=>$data['email']]);
+    			// 	}
+    			// 	return redirect('/cart');
+    			// }
 	    	}
     	}
     }
-
+	public function activateUser($token)
+    {
+        if ($user = $this->activationService->activateUser($token)) {
+            return redirect('/login-register')->with('flash_message_error', 'Tài khoản đã được kích hoạt. Vui lòng đăng nhập !!');
+        }
+        abort(404);
+    }
     public function logout() {
     	Auth::logout();
     	Session::forget('frontSession');
@@ -53,13 +75,19 @@ class UsersController extends Controller
     	if ($request->isMethod('post')) {
     		$data = $request->all();
     		if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
-    			Session::put('frontSession',$data['email']);
-
-    			if(!empty(Session::get('session_id'))){
-    				$session_id = Session::get('session_id');
-    				DB::table('cart')->where('session_id', $session_id)->update(['user_email'=>$data['email']]);
-    			}
-    			return redirect('/cart');
+				$test= DB::table('users')->where('email',$data['email'])->first();
+				if($test->active==0){
+					auth()->logout();
+					return redirect()->back()->with('flash_message_error', 'Check your authenticated email to login !');
+				}
+    			
+				Session::put('frontSession',$data['email']);
+				if(!empty(Session::get('session_id'))){
+					$session_id = Session::get('session_id');
+					DB::table('cart')->where('session_id', $session_id)->update(['user_email'=>$data['email']]);
+				}
+				return redirect('/cart');
+				
     		}
     		else {
     			return redirect()->back()->with('flash_message_error', 'Invalid Username or Password!');
